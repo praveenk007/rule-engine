@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import static org.junit.Assert.*;
 
 /**
@@ -13,7 +14,7 @@ public class RuleEngineTest {
 
     @Test
     public void rule1() {
-        final String expression = "( age > 25 AND gender == Male ) OR ( past_order_amount > 10000 )";
+        final String expression = "( age > 25 AND gender == \"Male\" ) OR ( past_order_amount > 10000 )";
         final Map<String, Object> facts = new HashMap<>();
         facts.put("age", 30);
         facts.put("gender", "Male");
@@ -90,10 +91,7 @@ public class RuleEngineTest {
         final Map<String, Object> facts = new HashMap<>();
         facts.put("a", 4);
         facts.put("b", 9);
-        long start = System.currentTimeMillis();
         double op = (Double) new RuleEngine().execute(expression, facts);
-        long end = System.currentTimeMillis();
-        System.out.println("Total time = " + (end - start));
         assertNotEquals(10, op, 1);
     }
 }
