@@ -14,12 +14,15 @@ public class RuleEngineTest {
 
     @Test
     public void rule1() {
-        final String expression = "( age > 25 AND gender == \"Male\" ) OR ( past_order_amount > 10000 )";
+        final String expression = "( age > 25 AND gender == Male ) OR ( past_order_amount > 10000 )";
         final Map<String, Object> facts = new HashMap<>();
         facts.put("age", 30);
         facts.put("gender", "Male");
         facts.put("past_order_amount", 9000);
+        long start = System.currentTimeMillis();
         boolean op = (Boolean) new RuleEngine().execute(expression, facts);
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
         assertTrue(op);
     }
 
